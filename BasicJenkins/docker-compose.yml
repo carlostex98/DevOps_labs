@@ -1,0 +1,55 @@
+name: clusterUbuntu
+
+services:
+  ubuntu1:
+      image: ubuntu-ssh:latest
+      container_name: ubuntu1
+      ports:
+        - "2221:22"
+      restart: unless-stopped
+      volumes:
+        - home1:/home/devuser
+
+  ubuntu2:
+      image: ubuntu-ssh:latest
+      container_name: ubuntu2
+      ports:
+        - "2222:22"
+      restart: unless-stopped
+      volumes:
+        - home2:/home/devuser
+
+  ubuntu3:
+      image: ubuntu-ssh:latest
+      container_name: ubuntu3
+      ports:
+        - "2223:22"
+      restart: unless-stopped
+      volumes:
+        - home3:/home/devuser
+
+
+  ubuntu4:
+      image: ubuntu-ssh:latest
+      container_name: ubuntu4
+      ports:
+        - "2224:22"
+      restart: unless-stopped
+      volumes:
+        - home4:/home/devuser
+
+  ubuntu5:
+      image: ubuntu-ssh:latest
+      container_name: ubuntu5
+      ports:
+        - "2225:22"
+      restart: unless-stopped
+      volumes:
+        - home5:/home/devuser
+
+volumes:
+  home1:
+  home2:
+  home3:
+  home4:
+  home5:

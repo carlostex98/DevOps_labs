@@ -1,0 +1,43 @@
+def remote1=[:]
+remote1.name = 'ubuntu1'
+remote1.host = '10.190.119.133'
+remote1.port = 2221
+remote1.allowAnyHosts = true
+
+def remote2=[:]
+remote2.name = 'ubuntu2'
+remote2.host = '10.190.119.133'
+remote2.port = 2221
+remote2.allowAnyHosts = true
+
+
+pipeline {
+    agent any
+    environment {
+        DEV_USER=credentials('devuser')
+    }
+
+    stages {
+        stage('Hello') {
+        
+            steps {
+                script {
+                    remote1.user=env.DEV_USER_USR
+                    remote1.password=env.DEV_USER_PSW
+                    
+                    remote2.user=env.DEV_USER_USR
+                    remote2.password=env.DEV_USER_PSW
+                }
+                
+                sshCommand(remote: remote1, command: "sudo apt update")
+                sshCommand(remote: remote2, command: "sudo apt update")
+            }
+        }
+    }
+    
+    post {
+        always {
+            sleep 5
+        }
+    }
+}
